@@ -30,12 +30,12 @@ module Rack
       end
       @driver = driver
     end
-    
+
     def call(env)
       return @app.call env if bypass? env
 
       req = Rack::Request.new env
-      ENV["PATH"] += ":/home/j/src/isocode/"
+      ENV["PATH"] += ":/Users/jason/workspace/isocode/"
       stdin, stdout, stderr = Open3.popen3('isocode', '--', "#{req.scheme}://localhost:#{req.port}#{req.fullpath}")
       stdin.close
       body = stdout.read
